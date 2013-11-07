@@ -22,28 +22,36 @@ namespace practicaFormaMultiElementosGui
             Revisar revisar = new Revisar();
 
             string capitalMexico = "";
+
             if (df.Checked)
                 capitalMexico = "df";
             else if (gdl.Checked)
-                capitalMexico = "gdl";
+               capitalMexico = "gdl";
             else if (mty.Checked)
-                capitalMexico = "mty";
+               capitalMexico = "mty";
 
-            string paisesEuropa = "incorrecto";
+
+            int europeos = -1;
             if (portugal.Checked || chile.Checked || reinoUnido.Checked || macedonia.Checked || australia.Checked)
             { 
-                if (portugal.Checked && reinoUnido.Checked && macedonia.Checked)
-                    paisesEuropa = "correcto";
+            europeos = 0;
+            if(portugal.Checked)
+                europeos++;
+            if(reinoUnido.Checked)
+                europeos++;
+            if(macedonia.Checked)
+                europeos++;
+            if (australia.Checked || chile.Checked)
+                europeos = 0;
             }
             else
             {
-                paisesEuropa = "sinValores";
+                europeos =  -1;
             }
-            
 
             decimal estadosMexico = estados.Value;
             string segundaGuerra = calendario.SelectionRange.Start.ToShortDateString();
-            string notas = revisar.leerInfo(nombre.Text, codigo.Text, capitalMexico, paisesEuropa, estadosMexico, segundaGuerra);
+            string notas = revisar.leerInfo(nombre.Text, codigo.Text, capitalMexico, europeos, estadosMexico, segundaGuerra);
             if (notas != "")
                 nota.Text = notas;
         }

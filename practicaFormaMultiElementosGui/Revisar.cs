@@ -10,12 +10,12 @@ namespace practicaFormaMultiElementosGui
     class Revisar
     {
 
-        public string leerInfo(string codigo, string nombre,string capitalMexico, string paisesEuropa, decimal estadosMexico, string fechaSegGuerra)
+        public string leerInfo(string codigo, string nombre,string capitalMexico, int paisesEuropa, decimal estadosMexico, string fechaSegGuerra)
         {
             string resultado;
             int aciertos = 0;
 
-            if (codigo == "" || nombre == "" || capitalMexico == "" || paisesEuropa == "sinValores" || estadosMexico == 0 || fechaSegGuerra == "") 
+            if (codigo == "" || nombre == "" || capitalMexico == "" || paisesEuropa == -1 || estadosMexico == 0 || fechaSegGuerra == "") 
             {
                 MessageBox.Show("Por favor llene todos los campos.");
                 return "";
@@ -26,8 +26,8 @@ namespace practicaFormaMultiElementosGui
             if (capitalMexico == "df")
                 aciertos++;
             
-            if (paisesEuropa == "correcto")
-                aciertos++;
+            if (paisesEuropa !=0)
+                aciertos += paisesEuropa;
             
             if (estadosMexico == 31)
                 aciertos++;
@@ -38,8 +38,7 @@ namespace practicaFormaMultiElementosGui
 
             resultado = "Codigo: " + codigo;
             resultado += "\nNombre: " + nombre;
-            resultado += "\nAciertos: " + aciertos;
-            resultado += "\nfecha: " + fechaSegGuerra;
+            resultado += "\nAciertos: " + aciertos; 
 
             return resultado;
         }
